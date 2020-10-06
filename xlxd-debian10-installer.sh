@@ -1,4 +1,5 @@
 #!/bin/bash
+
 # A tool to install xlxd, your own D-Star Reflector.
 # For more information, please visit: https://n5amd.com
 #Lets begin-------------------------------------------------------------------------------------------------
@@ -12,7 +13,7 @@ fi
 if [ ! -e "/etc/debian_version" ]
 then
   echo ""
-  echo "This script is only tested in Debian 9 and x64 cpu Arch. "
+  echo "This script is only tested in Debian 10 and x64 cpu Arch. "
   exit 0
 fi
 DIRDIR=$(pwd)
@@ -22,7 +23,7 @@ XLXDREPO=https://github.com/LX3JL/xlxd.git
 DMRIDURL=http://xlxapi.rlx.lu/api/exportdmr.php
 WEBDIR=/var/www/xlxd
 XLXINSTDIR=/root/reflector-install-files/xlxd
-DEP="git build-essential apache2 php libapache2-mod-php php7.0-mbstring"
+DEP="git build-essential apache2 php libapache2-mod-php php7.3-mbstring"
 clear
 echo ""
 echo "XLX uses 3 digit numbers for its reflectors. For example: 032, 999, 099."
@@ -46,7 +47,7 @@ mkdir -p $XLXINSTDIR
 mkdir -p $WEBDIR
 apt-get update
 apt-get -y install $DEP
-a2enmod php7.0
+a2enmod php7.3
 echo "------------------------------------------------------------------------------"
 if [ -e $XLXINSTDIR/xlxd/src/xlxd ]
 then
