@@ -23,7 +23,7 @@ DMRIDURL=http://xlxapi.rlx.lu/api/exportdmr.php
 WEBDIR=/var/www/xlxd
 XLXINSTDIR=/root/reflector-install-files/xlxd
 XLXSETUPDIR=/root/xlxd-debian-installer
-DEP="git build-essential apache2 php libapache2-mod-php php7.0-mbstring"
+DEP="git build-essential apache2 php libapache2-mod-php php7.3-mbstring make g++"
 clear
 echo ""
 echo "XLX uses 3 digit numbers for its reflectors. For example: 032, 999, 099."
@@ -47,7 +47,7 @@ mkdir -p $XLXINSTDIR
 mkdir -p $WEBDIR
 apt-get update
 apt-get -y install $DEP
-a2enmod php7.0
+a2enmod php7.3
 echo "------------------------------------------------------------------------------"
 if [ -e $XLXINSTDIR/xlxd/src/xlxd ]
 then
@@ -85,7 +85,7 @@ wget -O /xlxd/dmrid.dat $DMRIDURL
 echo "------------------------------------------------------------------------------"
 echo "Copying web dashboard files and updating init script... "
 #cp -R $XLXINSTDIR/xlxd/dashboard/* /var/www/xlxd/
-cp -R /root/reflector-install-files/xlxd/xlxd/dashboard/* /var/www/xlx/
+cp -R /root/reflector-install-files/xlxd/xlxd/dashboard/* /var/www/xlxd/
 cp $XLXINSTDIR/xlxd/scripts/xlxd /etc/init.d/xlxd
 sed -i "s/XLX999 192.168.1.240 127.0.0.1/$XRFNUM $LOCAL_IP 127.0.0.1/g" /etc/init.d/xlxd
 update-rc.d xlxd defaults
